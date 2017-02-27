@@ -58,6 +58,7 @@ public class Exercises {
     private boolean leftChar(char leftCh){
         return L_CHARS.stream().anyMatch((Character ch) -> ch.equals(leftCh));
 
+
     }
 
     public static void main(String[] args) {
