@@ -1,6 +1,5 @@
 package com.olegzet;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
@@ -9,15 +8,16 @@ import java.util.Stack;
  * Created by Oleg on 24/02/2017.
  */
 public class Exercises {
-    private static final char L_F = "{".charAt(0);
-    private static final char L_K = "[".charAt(0);
-    private static final char L_R = "(".charAt(0);
-    private static final List<Character> L_CHARS = Arrays.asList(L_F, L_K,L_R);
-    private static final char R_F = "}".charAt(0);
-    private static final char R_K = "]".charAt(0);
-    private static final char R_R = ")".charAt(0);
+    private static final char L_F = '{';
+    private static final char L_K = '[';
+    private static final char L_R = '(';
+    private static final List<Character> L_CHARS = Arrays.asList(L_F, L_K, L_R);
+    private static final char R_F = '}';
+    private static final char R_K = ']';
+    private static final char R_R = ')';
 
-    public int maxBlock(String str) {
+    // http://codingbat.com/prob/p179479
+    public static int maxBlock(final String str) {
         int maxBlock = 0;
         if (str.isEmpty()) {
             return maxBlock;
@@ -41,27 +41,72 @@ public class Exercises {
         return maxBlock;
     }
 
-    public boolean valid(String str) {
+    // http://codingbat.com/prob/p196409
+    public static int maxMirror(int[] nums) {
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = nums.length - 1; j >= 0; j--) {
+                int count = 0;
+                int pI = i;
+                int pJ = j;
+                while (pI < nums.length && pJ >= 0 && nums[pI] == nums[pJ]) {
+                    count++;
+                    pI++;
+                    pJ--;
+                }
+                max = Math.max(count, max);
+            }
+        }
+        return max;
+    }
+
+    public static boolean bracketsValidation(final String str) {
         Stack<Character> stack = new Stack<Character>();
         for (int i = 0; i < str.length(); i++) {
-            if (open(str[i])) {
-                s.push(str[i]);
+            char currentChar = str.charAt(i);
+            if (isLeftChar(currentChar)) {
+                stack.push(currentChar);
             } else {
-                if (reverse(str[i], s.peel())) s.pop()
-                else {
-                    break;
+                if (isPairChar(stack.peek(), currentChar)) {
+                    stack.pop();
+                } else {
+                    return false;
                 }
             }
         }
+        return true;
     }
 
-    private boolean leftChar(char leftCh){
-        return L_CHARS.stream().anyMatch((Character ch) -> ch.equals(leftCh));
-
-
+    private static boolean isLeftChar(final char leftCh) {
+        return L_CHARS.stream().anyMatch(ch -> ch.equals(leftCh));
     }
 
-    public static void main(String[] args) {
+    private static boolean isPairChar(final char leftCh, final char rightCh) {
+        /*switch (leftCh) {
+            case L_F:
+                if (rightCh == R_F) {
+                    return true;
+                }
+            case L_K:
+                if (rightCh == R_K) {
+                    return true;
+                }
+            case L_R:
+                if (rightCh == R_R) {
+                    return true;
+                }
+            default:
+                return false;
+        }*/
+        return ((leftCh == L_F && rightCh == R_F) || (leftCh == L_K && rightCh == R_K) || (leftCh == L_R && rightCh == R_R));
+    }
+
+    public static void main(final String[] args) {
+/*        Scanner input = new Scanner(System.in);
+        System.out.println("Input validating string: ");
+        String validatingString = input.next();
+        System.out.print("Result of validation: ");
+        System.out.println(bracketsValidation(validatingString));*/
 
     }
 }

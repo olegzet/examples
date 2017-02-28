@@ -1,7 +1,12 @@
-.idea
+out
+build
+*.iml
+# *.ipr
 *.iws
-
-/out/
-.idea_modules/
-/build/
-/.gradle/
+*Bundle
+.DS_*
+.gradle
+.vagrant
+classes
+.env
+.DS_Store
