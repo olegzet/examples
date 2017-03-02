@@ -2,6 +2,7 @@ package com.olegzet;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -102,11 +103,11 @@ public class Exercises {
     }
 
     public static void main(final String[] args) {
-/*        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Input validating string: ");
         String validatingString = input.next();
         System.out.print("Result of validation: ");
-        System.out.println(bracketsValidation(validatingString));*/
+        System.out.println(bracketsValidation(validatingString));
 
     }
 }
